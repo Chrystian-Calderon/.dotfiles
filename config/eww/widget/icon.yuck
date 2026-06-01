@@ -1,0 +1,8 @@
+(defwidget icon [name size]
+  (image
+    :class "icon"
+    :path "./assets/icons/${name}.png"
+    :image-width {size}
+    :image-height {size}
+    :halign "center"
+    :valign "center"))

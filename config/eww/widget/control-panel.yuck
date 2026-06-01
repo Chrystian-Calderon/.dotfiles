@@ -1,0 +1,157 @@
+(defvar control_panel_open false)
+(defvar wifi_open false)
+(defvar bluetooth_open false)
+
+(defwidget quick-settings []
+  (box
+    :class "quick-settings"
+    :orientation "v"
+    :spacing 16
+    :space-evenly false
+
+    ;; =========================
+    ;; volume
+    ;; =========================
+
+    (box
+      :class "setting-row"
+      :spacing 10
+
+      (icon
+        :name "audio-volume-high-symbolic"
+        :size 20)
+
+      (scale
+        :class "setting-scale"
+        :min 0
+        :max 100
+        :value 65
+        :draw-value false
+        :hexpand true))
+
+    ;; =========================
+    ;; brightness
+    ;; =========================
+
+    (box
+      :class "setting-row"
+      :spacing 10
+
+      (icon
+        :name "display-brightness-symbolic"
+        :size 20)
+
+      (scale
+        :class "setting-scale"
+        :min 0
+        :max 100
+        :value 80
+        :draw-value false
+        :hexpand true))
+
+    ;; =========================
+    ;; wifi
+    ;; =========================
+
+    (box
+      :orientation "v"
+      :spacing 8
+
+      (button
+        :class "toggle-button ${wifi_open ? "open" : ""}"
+        :onclick "eww update wifi_open=!${wifi_open}"
+
+        (box
+          :spacing 10
+          :hexpand true
+
+          (icon
+            :name "network-wireless-symbolic"
+            :size 18)
+
+          (label
+            :hexpand true
+            :xalign 0
+            :text "Wi-Fi")
+
+          (label
+            :text "${wifi_open ? "󰅀" : "󰅂"}")))
+
+      (revealer
+        :transition "slideup"
+        :reveal wifi_open
+
+        (box
+          :class "connections"
+          :orientation "v"
+          :spacing 6
+
+          (button :class "connection-item" "Home WiFi")
+          (button :class "connection-item" "Mobile Hotspot")
+          (button :class "connection-item" "Office Network"))))
+
+    ;; =========================
+    ;; bluetooth
+    ;; =========================
+
+    (box
+      :orientation "v"
+      :spacing 8
+
+      (button
+        :class "toggle-button ${bluetooth_open ? "open" : ""}"
+        :onclick "eww update bluetooth_open=!${bluetooth_open}"
+
+        (box
+          :spacing 10
+          :hexpand true
+
+          (icon
+            :name "bluetooth-active-symbolic"
+            :size 18)
+
+          (label
+            :hexpand true
+            :xalign 0
+            :text "Bluetooth")
+
+          (label
+            :text "${bluetooth_open ? "󰅀" : "󰅂"}")))
+
+      (revealer
+        :transition "slideup"
+        :reveal bluetooth_open
+
+        (box
+          :class "connections"
+          :orientation "v"
+          :spacing 6
+
+          (button :class "connection-item" "Headphones")
+          (button :class "connection-item" "Keyboard")
+          (button :class "connection-item" "Speaker"))))))
+
+(defwindow control-panel
+  :monitor 0
+  :geometry (geometry
+    :x "5px"
+    :y "5px"
+    :anchor "top right")
+  (box
+    :class "control-panel"
+    (quick-settings)))
+
+(defwidget control-panel-btn []
+  (button
+    :class "control-panel-btn"
+    :onclick "
+      if [ \"$(eww get control_panel_open)\" = \"true\" ]; then
+        eww update control_panel_open=false
+        eww close control-panel
+      else
+        eww update control_panel_open=true
+        eww open control-panel
+      fi
+    "
+
+    (icon :name "control" :size 16)))

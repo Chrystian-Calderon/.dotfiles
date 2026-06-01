@@ -1,0 +1,14 @@
+.battery {
+  background-color: $surface0;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  border-radius: 1rem 0 0 1rem;
+}
+
+.battery-charging {
+  color: #1ceb09;
+}
+
+.battery-critical {
+  color: #e84c85;
+}

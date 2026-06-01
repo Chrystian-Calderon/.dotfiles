@@ -1,0 +1,20 @@
+(deflisten active_icon
+  `bash ~/.config/eww/scripts/active-window-icon.sh`)
+
+(deflisten active_class
+  `bash ~/.config/eww/scripts/active-window-class.sh`)
+
+(defwidget active-window []
+  (revealer
+    :reveal {active_class != "" && active_class != "null"}
+    :transition "slideright"
+
+    (box :class "active-window" :orientation "horizontal" :spacing 5 :space-evenly false
+      (image
+        :class "window-icon"
+        :path active_icon
+        :image-width 16
+        :image-height 16
+        :halign "center"
+        :valign "center")
+      (label :text {active_class}))))

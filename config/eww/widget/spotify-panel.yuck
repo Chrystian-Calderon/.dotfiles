@@ -1,0 +1,75 @@
+(defwidget spotify-panel []
+  (box
+    :halign "start"
+    :valign "start"
+    :class "spotify-panel ${spotify.status}"
+    :orientation "h"
+    :spacing 10
+    :space-evenly false
+
+    ;; cover
+    (box
+      :class "cover-wrapper"
+
+      (box
+        :class "cover"
+        :style "background-image: url('${spotify.cover}');"
+        :width 150
+        :height 150
+        ))
+
+    ;; panel
+    (box
+      :orientation "v"
+
+      (label
+        :class "title"
+        :limit-width 20
+        :text "${spotify.title}")
+
+      (label
+        :class "artist"
+        :limit-width 20
+        :text "${spotify.artist}")
+      
+      (scale
+        :min 0
+        :max {spotify.length}
+        :value {spotify.position}
+        :draw-value false
+        :hexpand true)
+
+      ;; controles
+      (box
+        :class "controls"
+        :spacing 10
+        :width 200
+
+        (button 
+          :class "player-skip-back"
+          :onclick "playerctl -p spotify previous"
+          (icon :name "player-skip-back" :size 16))
+
+        (button
+          :class "player-play-paused"
+          :onclick "playerctl -p spotify play-pause"
+          (icon :name {spotify.status == "Playing" ? "player-pause" : "player-play"} :size 16))
+
+        (button
+          :class "player-skip-forward"
+          :onclick "playerctl -p spotify next"
+          (icon :name "player-skip-forward" :size 16)))
+    )))
+
+(defwindow spotify-panel
+  :monitor 0
+  :stacking "overlay"
+  :focusable "ondemand"
+  :geometry (geometry
+    :x "120px"
+    :y "5px"
+    :width "400px"
+    :height "200px"
+    :anchor "top left")
+
+  (spotify-panel))

@@ -1,0 +1,68 @@
+.control-panel-btn {
+  background-color: $surface0;
+  padding: 0.5rem;
+}
+
+.control-panel {
+  background-color: $surface0;
+  border-radius: 0.2rem;
+}
+
+.quick-settings {
+  background: rgba(20,20,20,0.95);
+
+  padding: 20px;
+  border-radius: 20px;
+
+  min-width: 320px;
+}
+
+.setting-row {
+  padding: 6px 0;
+  background-color: red;
+}
+
+.setting-scale trough {
+  background: rgba(255,255,255,0.08);
+
+  min-height: 6px;
+  border-radius: 999px;
+}
+
+.setting-scale highlight {
+  background: #1db954;
+  border-radius: 999px;
+}
+
+.setting-scale slider {
+  background: #1db954;
+
+  min-width: 12px;
+  min-height: 12px;
+
+  border-radius: 999px;
+
+  margin: -4px;
+}
+
+.toggle-button {
+  background: rgba(255,255,255,0.05);
+
+  padding: 12px;
+  border-radius: 14px;
+}
+
+.toggle-button.open {
+  background: rgba(29,185,84,0.15);
+}
+
+.connections {
+  padding: 0 8px;
+}
+
+.connection-item {
+  background: rgba(255,255,255,0.04);
+
+  padding: 10px;
+  border-radius: 10px;
+}

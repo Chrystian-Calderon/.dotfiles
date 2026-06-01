@@ -1,0 +1,26 @@
+(defwidget battery []
+  (box :class "battery" :spacing 2
+    (icon 
+      :name {
+        EWW_BATTERY.BAT0.status == "Charging"
+          ? "battery-charging"
+          : EWW_BATTERY.BAT0.capacity <= 15
+            ? "battery-critical"
+            : EWW_BATTERY.BAT0.capacity >= 76
+              ? "battery-4"
+              : EWW_BATTERY.BAT0.capacity >= 51
+                ? "battery-3"
+                : EWW_BATTERY.BAT0.capacity >= 26
+                  ? "battery-2"
+                  : "battery-1"
+      }
+      :size 16)
+    (label
+      :class {
+        EWW_BATTERY.BAT0.status == "Charging"
+          ? "battery-charging"
+          : EWW_BATTERY.BAT0.capacity <= 15
+            ? "battery-critical"
+            : "battery-normal"
+      }
+      :text "${EWW_BATTERY.BAT0["capacity"]}")))

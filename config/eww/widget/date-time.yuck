@@ -1,0 +1,70 @@
+(defvar calendar_menu_open false)
+
+(defpoll date_time
+  :interval "1s"
+  `date '+%A %H:%M'`)
+
+(defpoll current_time
+  :interval "1s"
+  `date '+%H:%M'`)
+
+(defpoll current_date
+  :interval "60s"
+  `date '+%-d %b'`)
+
+(defwidget datemenu []
+  (box
+    :valign "start"
+    :halign "start"
+    :orientation "v"
+    :class "calendar-window"
+    :space-evenly false
+
+    (box
+      :halign "center"
+      :hexpand false
+      (box
+        :class "calendar-header"
+        :orientation "h"
+        :spacing 2
+
+        (label
+          :class "calendar-date"
+          :text current_date)
+
+        (label
+          :class "calendar-time"
+          :text current_time)))
+
+    ;; calendar
+    (box
+      (calendar
+        :class "calendar-widget"
+        :show-details true))))
+
+(defwindow calendar-menu
+  :monitor 0
+  :stacking "overlay"
+  :focusable "ondemand"
+
+  :geometry (geometry
+    :x "0%"
+    :y "5px"
+    :anchor "top center")
+
+  (datemenu))
+
+(defwidget date-time []
+  (button
+    :class "date-time"
+    :onclick "
+      if [ \"$(eww get calendar_menu_open)\" = \"true\" ]; then
+        eww update calendar_menu_open=false
+        eww close calendar-menu
+      else
+        eww update calendar_menu_open=true
+        eww open calendar-menu
+      fi
+    "
+    (label
+      :text date_time)))

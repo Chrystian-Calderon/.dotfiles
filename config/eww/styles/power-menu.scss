@@ -1,0 +1,17 @@
+.power-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.power-content {
+  background-color: #1e1e2e;
+  border-radius: 0.2rem;
+}
+
+.power-item {
+  padding: 8px;
+  border-radius: 0.2rem;
+}
+
+.power-item:hover {
+  background-color: $surface1;
+}

@@ -1,0 +1,4 @@
+(defwidget temperature-widget []
+  (box :class "temperature-widget" :spacing 0 :space-evenly false
+    (icon :name "temperature" :size 16)
+    (label :text "${EWW_TEMPS.ACPITZ_TEMP1}°C")))

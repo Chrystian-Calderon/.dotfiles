@@ -1,0 +1,54 @@
+(defvar summary_manage_system_open false)
+
+(defwindow summary-manage-system-menu
+  :monitor 0
+  :geometry (geometry
+    :x "10px"
+    :y "10px"
+    :width "200px"
+    :height "140px"
+    :anchor "top left")
+
+  (box
+    :class "menu-summary-manage-system"
+    :orientation "vertical"
+    :space-evenly false
+
+    (box :class "menu-box" :orientation "h"
+      (label :class "menu-text" :text "CPU ${round(EWW_CPU.avg, 0)}%")
+      (label :class "menu-text" :text "RAM ${round(EWW_RAM.used_mem_perc,0)}%"))
+
+    (box :class "disk-summary" :orientation "vertical"
+      (box
+        :orientation "horizontal"
+        :space-evenly false
+        :halign "fill"
+        :spacing 5
+
+        (label
+          :class "title"
+          :xalign 0
+          :text "Disk")
+
+        (label
+          :class "percent"
+          :xalign 1
+          :text "${round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}%"))
+      (progress
+        :class "disk-progress"
+        :value {(1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100}))))
+
+(defwidget summary-manage-system []
+  (button
+    :class "summary-manage-system"
+    :onclick "
+      if [ \"$(eww get summary_manage_system_open)\" = \"true\" ]; then
+        eww update summary_manage_system_open=false
+        eww close summary-manage-system-menu
+      else
+        eww update summary_manage_system_open=true
+        eww open summary-manage-system-menu
+      fi
+    "
+
+    (icon :name "manage-system" :size 16)))

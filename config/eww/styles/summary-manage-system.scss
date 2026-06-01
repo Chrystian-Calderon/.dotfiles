@@ -1,0 +1,47 @@
+.menu-summary-manage-system {
+  background: $surface0;
+  border-radius: 12px;
+}
+
+.menu-box {
+  padding: 10px 0;
+  border-bottom: 1px solid $surface2;
+}
+
+.menu-text {
+  padding: 1rem 0;
+}
+
+.disk-summary {
+  padding: 1.5rem;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.percent {
+  color: $sky;
+}
+
+.disk-progress {
+  min-height: 8px;
+
+  trough {
+    background: $surface2;
+    border-radius: 999px;
+  }
+
+  progress {
+    background: $sky;
+    border-radius: 999px;
+  }
+}
+
+.summary-manage-system {
+  background-color: $surface0;
+  padding: 0.5rem;
+  padding-right: 1rem;
+  margin: 0;
+  border-radius: 0 1rem 1rem 0;
+}

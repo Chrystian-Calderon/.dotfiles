@@ -1,0 +1,14 @@
+(defwidget power-btn []
+  (button
+    :class "power-btn"
+    :onclick "
+      if [ \"$(eww get power_menu_open)\" = \"true\" ]; then
+        eww update power_menu_open=false
+        eww close power-menu
+      else
+        eww update power_menu_open=true
+        eww open power-menu
+      fi
+    "
+    
+    (icon :name "power" :size 16)))

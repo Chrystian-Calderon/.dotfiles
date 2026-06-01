@@ -1,0 +1,16 @@
+(defpoll checkupdates
+  :interval "24h"
+  `checkupdates 2>/dev/null | wc -l`)
+
+(defwidget updates []
+  (revealer
+    :transition "slideleft"
+    :reveal {checkupdates != "0"}
+    (box
+      :class "updates"
+      :spacing 4
+
+      (icon :name "refresh" :size 16)
+      
+          (label
+            :text {checkupdates}))))

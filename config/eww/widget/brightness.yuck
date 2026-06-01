@@ -1,0 +1,3 @@
+(defwidget brightness []
+  (box :class "brightness"
+    (icon :name "brightness-down" :size 16)))

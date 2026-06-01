@@ -1,0 +1,50 @@
+(defvar tray_open false)
+
+(defpoll tray_apps
+  :interval "5s"
+  `bash ~/.config/eww/scripts/tray-apps.sh`)
+
+(defwidget tray-button []
+  (revealer
+    :reveal {tray_apps != "[]"}
+    :transition "slideleft"
+
+    (box
+      :class "tray-container"
+      :orientation "horizontal"
+      :space-evenly false
+
+      ;; apps
+      (revealer
+        :reveal tray_open
+        :transition "slideright"
+
+        (box
+          :class "tray-apps"
+          :orientation "horizontal"
+          :space-evenly false
+
+          (for app in tray_apps
+            (button
+              :class "tray-app"
+              :onclick "hyprctl dispatch focuswindow \"class:^(${app})$\""
+
+              (image
+                :path "./assets/applications/${app}.png"
+                :image-width 16
+                :image-height 16
+                :valign "center"
+                :halign "center")))))
+
+      (button
+        :class "tray-toggle ${tray_open ? "open" : ""}"
+
+        :onclick "
+          if [ \"$(eww get tray_open)\" = \"true\" ]; then
+            eww update tray_open=false
+          else
+            eww update tray_open=true
+          fi
+        "
+
+        (icon :name "play" :size 10)))))

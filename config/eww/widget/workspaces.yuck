@@ -1,0 +1,15 @@
+(deflisten workspaces_data
+  `bash ~/.config/eww/scripts/workspaces.sh`)
+
+(defwidget workspaces []
+  (box :class "workspaces"
+       :orientation "h"
+       :space-evenly true
+       :halign "start"
+
+    (for workspace in workspaces_data
+      (button
+        :class {workspace.active ? "workspace active" : "workspace"}
+        :onclick "hyprctl dispatch workspace ${workspace.id}"
+        (label :text "${workspace.id}"))
+    )))

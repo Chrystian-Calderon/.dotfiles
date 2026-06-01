@@ -1,0 +1,47 @@
+(defpoll spotify
+  :interval "1s"
+  :initial "{}"
+  `~/.config/eww/scripts/spotify.sh`)
+
+(defwidget spotify-bar []
+  (box
+    :class "spotify-bar"
+    :visible {spotify.status == "Playing" || spotify.status == "Paused"}
+    :space-evenly false
+    :spacing 5
+
+    (button
+      :onclick "
+        if [ \"$(eww get spotify_panel_open)\" = \"true\" ]; then
+          eww update spotify_panel_open=false
+          eww close spotify-panel
+        else
+          eww update spotify_panel_open=true
+          eww open spotify-panel
+        fi
+      "
+      (image
+        :path "./assets/applications/spotify.png"
+        :image-width 16
+        :image-height 16
+        :halign "center"
+        :valign "center"))
+
+    (button
+      :class "player-skip-back"
+      :onclick "playerctl -p spotify previous"
+      (icon :name "player-skip-back" :size 16))
+
+    (button
+      :class "player-play-paused"
+      :onclick "playerctl -p spotify play-pause"
+      (icon :name {spotify.status == "Playing" ? "player-pause" : "player-play"} :size 16))
+
+    (button
+      :class "player-skip-forward"
+      :onclick "playerctl -p spotify next"
+      (icon :name "player-skip-forward" :size 16))
+
+    (label
+      :limit-width 15
+      :text "${spotify.title}")))

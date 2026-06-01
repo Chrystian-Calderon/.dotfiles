@@ -1,0 +1,63 @@
+.spotify-panel {
+  padding: 12px;
+  border-radius: 12px;
+  background-color: $surface0;
+}
+
+.cover-wrapper {
+  padding:5px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+}
+
+.cover {
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: $text;
+}
+
+scale {
+  min-height: 8px;
+  min-width: 120px;
+}
+
+scale trough {
+  background: $surface2;
+  border-radius: 999px;
+  min-height: 6px;
+}
+
+scale highlight {
+  background: $sky;
+  border-radius: 999px;
+}
+
+scale slider {
+  background: white;
+  border-radius: 999px;
+
+  min-width: 12px;
+  min-height: 12px;
+
+  margin: -4px;
+}
+
+.player-play-paused,
+.player-skip-back,
+.player-skip-forward {
+  padding: 0 5px;
+}
+
+.player-skip-back:hover,
+.player-play-paused:hover,
+.player-skip-forward:hover {
+  background-color: $surface2;
+  border-radius: 10px;
+}

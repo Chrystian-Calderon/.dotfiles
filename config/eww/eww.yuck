@@ -1,0 +1,54 @@
+;; var
+(defvar power_menu_open false)
+(defvar spotify_panel_open false)
+
+;; include widget
+(include "./widget/icon.yuck")
+(include "./widget/temperature.yuck")
+(include "./widget/summary-manage-system.yuck")
+(include "./widget/active-window.yuck")
+(include "./widget/workspaces.yuck")
+(include "./widget/brightness.yuck")
+(include "./widget/tray.yuck")
+(include "./widget/battery.yuck")
+(include "./widget/updates.yuck")
+(include "./widget/control-panel.yuck")
+(include "./widget/date-time.yuck")
+(include "./widget/power-btn.yuck")
+(include "./widget/power-menu.yuck")
+(include "./widget/spotify-bar.yuck")
+(include "./widget/spotify-panel.yuck")
+
+(defwidget bar []
+  (centerbox :orientation "h"
+    (left)
+    (workspaces)
+    (right)))
+
+(defwidget left []
+  (box :class "w-left" :orientation "h" :space-evenly false :halign "start" :spacing 0
+    (temperature-widget)
+    (summary-manage-system)
+    (spotify-bar)
+    (active-window)))
+
+(defwidget right []
+  (box :class "w-right" :orientation "h" :space-evenly false :halign "end" :spacing 0
+    (tray-button)
+    (updates)
+    (battery)
+    (control-panel-btn)
+    (date-time)
+    (power-btn)))
+
+(defwindow bar
+  :monitor 0
+  :stacking "fg"
+  :focusable false
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "100%"
+                      :height "10px"
+                      :anchor "top center")
+  :exclusive true
+  (bar))
