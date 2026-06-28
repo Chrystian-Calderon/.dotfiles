@@ -1,0 +1,5 @@
+hl.on("hyprland.start", function ()
+  hl.exec_cmd("awww-daemon")
+  hl.exec_cmd("eww daemon")
+  hl.exec_cmd("eww open bar")
+end)
