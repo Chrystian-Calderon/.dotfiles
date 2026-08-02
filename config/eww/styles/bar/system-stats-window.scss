@@ -1,0 +1,45 @@
+.system-stats {
+  background: $surface1;
+  border-radius: 0.5rem;
+  margin: 1.5rem;
+  margin-left: 1rem;
+}
+
+.system-stats-window {
+  background: none;
+}
+
+.menu-box {
+  padding: 10px 0;
+  border-bottom: 1px solid $surface2;
+}
+
+.menu-text {
+  padding: 1rem 0;
+}
+
+.disk-summary {
+  padding: 1.5rem;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.percent {
+  color: $sky;
+}
+
+.disk-progress {
+  min-height: 8px;
+
+  trough {
+    background: $surface2;
+    border-radius: 999px;
+  }
+
+  progress {
+    background: $sky;
+    border-radius: 999px;
+  }
+}

@@ -1,0 +1,27 @@
+.brightness-indicator-widget {
+  background: rgba(108, 112, 134, 0.5);
+  padding: 1rem;
+  padding-top: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.brightness-indicator-widget scale {
+  min-height: 6px;
+  margin-top: 0.5rem;
+}
+
+.brightness-indicator-widget scale trough {
+  min-height: 6px;
+  border-radius: 0;
+}
+
+.brightness-indicator-widget scale highlight {
+  min-height: 6px;
+  border-radius: 0;
+}
+
+.brightness-indicator-widget scale slider {
+  min-width: 0;
+  min-height: 0;
+  opacity: 0;
+}
