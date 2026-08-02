@@ -1,0 +1,41 @@
+(defwidget system-stats []
+  (eventbox
+    :onclick "eww close system-stats-window"
+
+    (box
+      :class "system-stats"
+      :halign "start"
+      :valign "start"
+
+      (box
+        :class "system-stats-window"
+        :orientation "vertical"
+        :space-evenly false
+        :vexpand false
+        :hexpand false
+
+        (box :class "menu-box" :orientation "h"
+          (label :class "menu-text" :text "CPU ${round(EWW_CPU.avg, 0)}%")
+          (label :class "menu-text" :text "RAM ${round(EWW_RAM.used_mem_perc,0)}%"))
+          
+        (box :class "disk-summary" :orientation "vertical"
+          (box
+            :orientation "horizontal"
+            :space-evenly false
+            :halign "fill"
+            :spacing 5
+
+            (label
+              :class "title"
+              :xalign 0
+              :text "Disk")
+
+            (label
+              :class "percent"
+              :xalign 1
+              :text "${round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}%"))
+          (progress
+            :class "disk-progress"
+            :value {(1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100}))))))
+
+    
