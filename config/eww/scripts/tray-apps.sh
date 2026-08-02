@@ -1,10 +1,35 @@
 #!/bin/bash
 
-apps=()
+declare -A APP_PROCESS=(
+  [spotify]="spotify"
+  [steam]="steam"
+  [discord]="Discord"
+  [telegram]="Telegram"
+)
 
-pgrep spotify >/dev/null && apps+=('"spotify"')
-pgrep steam >/dev/null && apps+=('"steam"')
-pgrep Discord >/dev/null && apps+=('"discord"')
-pgrep telegram-desktop >/dev/null && apps+=('"telegram"')
+declare -A APP_CLASS=(
+  [spotify]="Spotify"
+  [steam]="steam"
+  [discord]="discord"
+  [telegram]="org.telegram.desktop"
+)
 
-printf '[%s]\n' "$(IFS=,; echo "${apps[*]}")"
+json="["
+
+first=true
+
+for app in "${!APP_PROCESS[@]}"; do
+    process="${APP_PROCESS[$app]}"
+    class="${APP_CLASS[$app]}"
+
+    if hyprctl clients | grep -q "class: $class"; then
+        [ "$first" = true ] || json+=","
+        first=false
+
+        json+="{\"name\":\"$app\",\"class\":\"${APP_CLASS[$app]}\",\"icon\":\"${APP_CLASS[$app],,}\"}"
+    fi
+done
+
+json+="]"
+
+echo "$json"
