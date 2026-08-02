@@ -1,0 +1,15 @@
+(include "./widget/bar/system-stats.yuck")
+
+(defwindow system-stats-window
+  :monitor 0
+  :focusable "ondemand"
+  :stacking "overlay"
+
+  :geometry (geometry
+    :x "0"
+    :y "0"
+    :width "100%"
+    :height "100%"
+    :anchor "center")
+
+  (system-stats))
