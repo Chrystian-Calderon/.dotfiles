@@ -1,0 +1,18 @@
+(defpoll volume :interval "200ms"
+  "~/.config/eww/scripts/volume-get.sh")
+(defpoll muted :interval "200ms"
+  "wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q '\\[MUTED\\]' && echo true || echo false")
+
+(defwidget volume-indicator-widget []
+  (box
+    :class "volume-indicator-widget"
+    :orientation "v"
+    :space-evenly false
+    
+    (icon :name {muted ? "volume-mute" : volume >= 70 ? "volume-high" : volume >= 30 ? "volume-medium" : volume >= 1 ? "volume-low" : "volume-off"} :size 38)
+    (scale
+      :value volume
+      :min 0
+      :max 100
+      :orientation "h"
+      :draw-value false)))
