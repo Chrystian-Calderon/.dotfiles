@@ -1,0 +1,26 @@
+.volume-indicator-widget {
+  background: rgba(108, 112, 134, 0.5);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.volume-indicator-widget scale {
+  min-height: 6px;
+  margin-top: 0.5rem;
+}
+
+.volume-indicator-widget scale trough {
+  min-height: 6px;
+  border-radius: 0;
+}
+
+.volume-indicator-widget scale highlight {
+  min-height: 6px;
+  border-radius: 0;
+}
+
+.volume-indicator-widget scale slider {
+  min-width: 0;
+  min-height: 0;
+  opacity: 0;
+}

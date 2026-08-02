@@ -1,5 +1,8 @@
+(defpoll wifi_networks :interval "5s" :initial ""
+  "~/.config/eww/scripts/wifi-networks.sh")
 (defvar control_panel_open false)
-(defvar wifi_open false)
+(defvar wifi_expanded false)
+(defvar wifi_connected false)
 (defvar bluetooth_open false)
 
 (defwidget quick-settings []
@@ -9,61 +12,57 @@
     :spacing 16
     :space-evenly false
 
-    ;; =========================
     ;; volume
-    ;; =========================
-
     (box
       :class "setting-row"
       :spacing 10
 
       (icon
-        :name "audio-volume-high-symbolic"
+        :name "volume-medium"
         :size 20)
 
       (scale
         :class "setting-scale"
         :min 0
         :max 100
-        :value 65
+        :value volume
         :draw-value false
         :hexpand true))
 
-    ;; =========================
     ;; brightness
-    ;; =========================
-
     (box
       :class "setting-row"
       :spacing 10
 
       (icon
-        :name "display-brightness-symbolic"
+        :name {brightness >= 50 ? "brightness-up" : "brightness-down"}
         :size 20)
 
       (scale
         :class "setting-scale"
         :min 0
         :max 100
-        :value 80
+        :value brightness
         :draw-value false
         :hexpand true))
 
-    ;; =========================
     ;; wifi
-    ;; =========================
-
     (box
       :orientation "v"
       :spacing 8
 
       (button
-        :class "toggle-button ${wifi_open ? "open" : ""}"
-        :onclick "eww update wifi_open=!${wifi_open}"
+        :class "toggle-button ${wifi_expanded ? "open" : ""}"
+        :onclick "
+          if [ \"$(eww get wifi_expanded)\" = \"true\" ]; then
+            eww update wifi_expanded=false
+          else
+            eww update wifi_expanded=true
+          fi
+        "
 
         (box
           :spacing 10
-          :hexpand true
 
           (icon
             :name "network-wireless-symbolic"
@@ -75,25 +74,42 @@
             :text "Wi-Fi")
 
           (label
-            :text "${wifi_open ? "󰅀" : "󰅂"}")))
+            :text "${wifi_expanded ? "󰅀" : "󰅂"}")))
 
       (revealer
-        :transition "slideup"
-        :reveal wifi_open
+        :transition "slidedown"
+        :reveal wifi_expanded
 
-        (box
-          :class "connections"
-          :orientation "v"
-          :spacing 6
+        (scroll
+          :vscroll true
 
-          (button :class "connection-item" "Home WiFi")
-          (button :class "connection-item" "Mobile Hotspot")
-          (button :class "connection-item" "Office Network"))))
+          (box
+            :orientation "v"
 
-    ;; =========================
+            (for network in wifi_networks
+              (box
+                :class "wifi-networks"
+                :orientation "h"
+                :spacing 6
+                (label :text "${network.ssid}")
+                (button
+                  :onclick ""
+                  (label :text {network.in_use ? "Disconnect" : "Connect"}))
+                (revealer
+                  :reveal wifi_connected
+                  :transition "slidedown"
+                  :duration "300ms"
+                  (eventbox
+                    :onhoverlost "eww update wifi_connected=false"
+                    (box
+                      :orientation "h"
+                      (label :text "${network.ssid}")
+                      (input
+                        :password true
+                        :height 30))))
+            ))))))
+
     ;; bluetooth
-    ;; =========================
-
     (box
       :orientation "v"
       :spacing 8

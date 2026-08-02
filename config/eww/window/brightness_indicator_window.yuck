@@ -1,0 +1,16 @@
+(include "./widget/brightness_indicator_widget.yuck")
+
+(defwindow brightness-indicator-window
+  :monitor 0
+  :focusable "none"
+  :exclusive false
+  :stacking "fg"
+
+  :geometry (geometry
+    :x "0"
+    :y "100px"
+    :width "100px"
+    :height "100px"
+    :anchor "bottom center")
+
+  (brightness-indicator-widget))

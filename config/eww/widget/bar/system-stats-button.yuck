@@ -1,0 +1,16 @@
+(defvar summary_manage_system_open false)
+
+(defwidget system-stats-button []
+  (button
+    :class "system-stats-button"
+    :onclick "
+      if [ \"$(eww get summary_manage_system_open)\" = \"true\" ]; then
+        eww update summary_manage_system_open=false
+        eww close system-stats-window
+      else
+        eww update summary_manage_system_open=true
+        eww open system-stats-window
+      fi
+    "
+
+    (icon :name "manage-system" :size 16)))

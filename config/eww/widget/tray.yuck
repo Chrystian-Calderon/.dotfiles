@@ -27,10 +27,10 @@
           (for app in tray_apps
             (button
               :class "tray-app"
-              :onclick "hyprctl dispatch focuswindow \"class:^(${app})$\""
+              :onclick "hyprctl dispatch 'hl.dsp.focus({ window = \"class:${app.class}\" })'"
 
               (image
-                :path "./assets/applications/${app}.png"
+                :path "./assets/applications/${app.icon}.png"
                 :image-width 16
                 :image-height 16
                 :valign "center"

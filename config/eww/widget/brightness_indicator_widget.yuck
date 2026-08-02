@@ -1,0 +1,16 @@
+(defpoll brightness :interval "200ms"
+  "~/.config/eww/scripts/brightness-get.sh")
+
+(defwidget brightness-indicator-widget []
+  (box
+    :class "brightness-indicator-widget"
+    :orientation "v"
+    :space-evenly false
+    
+    (icon :name {brightness >= 50 ? "brightness-up-64" : "brightness-down-64"} :size 64)
+    (scale
+      :value brightness
+      :min 0
+      :max 100
+      :orientation "h"
+      :draw-value false)))

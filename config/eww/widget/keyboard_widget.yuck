@@ -1,0 +1,8 @@
+(defpoll keyboard_layout
+  :interval "300ms"
+  "~/.config/eww/scripts/keyboard-layout.sh")
+
+(defwidget keyboard-widget []
+  (label
+    :class "keyboard-layout"
+    :text keyboard_layout))

@@ -4,10 +4,10 @@
 
 ;; include widget
 (include "./widget/icon.yuck")
-(include "./widget/temperature.yuck")
-(include "./widget/summary-manage-system.yuck")
-(include "./widget/active-window.yuck")
-(include "./widget/workspaces.yuck")
+(include "./widget/bar/temperature.yuck")
+(include "./widget/bar/system-stats-button.yuck")
+(include "./widget/bar/focused-window.yuck")
+(include "./widget/bar/workspaces.yuck")
 (include "./widget/brightness.yuck")
 (include "./widget/tray.yuck")
 (include "./widget/battery.yuck")
@@ -18,6 +18,12 @@
 (include "./widget/power-menu.yuck")
 (include "./widget/spotify-bar.yuck")
 (include "./widget/spotify-panel.yuck")
+(include "./widget/keyboard_widget.yuck")
+
+;; include window
+(include "./window/system-stats-window.yuck")
+(include "./window/volume_indicator_window.yuck")
+(include "./window/brightness_indicator_window.yuck")
 
 (defwidget bar []
   (centerbox :orientation "h"
@@ -28,14 +34,15 @@
 (defwidget left []
   (box :class "w-left" :orientation "h" :space-evenly false :halign "start" :spacing 0
     (temperature-widget)
-    (summary-manage-system)
+    (system-stats-button)
     (spotify-bar)
-    (active-window)))
+    (focused-window)))
 
 (defwidget right []
   (box :class "w-right" :orientation "h" :space-evenly false :halign "end" :spacing 0
     (tray-button)
     (updates)
+    (keyboard-widget)
     (battery)
     (control-panel-btn)
     (date-time)

@@ -1,0 +1,16 @@
+(include "./widget/volume_indicator_widget.yuck")
+
+(defwindow volume-indicator-window
+  :monitor 0
+  :focusable "none"
+  :exclusive false
+  :stacking "fg"
+
+  :geometry (geometry
+    :x "0"
+    :y "100px"
+    :width "100px"
+    :height "50px"
+    :anchor "bottom center")
+
+  (volume-indicator-widget))

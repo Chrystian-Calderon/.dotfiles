@@ -40,6 +40,9 @@
     (box
       (calendar
         :class "calendar-widget"
+        :show-heading true
+        :show-day-names true
+        :show-week-numbers false
         :show-details true))))
 
 (defwindow calendar-menu

@@ -4,10 +4,11 @@
 
 @import "./styles/colors.scss";
 @import "./styles/icon.scss";
-@import "./styles/temperature.scss";
-@import "./styles/summary-manage-system.scss";
-@import "./styles/active-window.scss";
-@import "./styles/workspaces.scss";
+@import "./styles/bar/temperature.scss";
+@import "./styles/bar/system-stats-button.scss";
+@import "./styles/bar/system-stats-window.scss";
+@import "./styles/bar/focused-window.scss";
+@import "./styles/bar/workspaces.scss";
 @import "./styles/brightness.scss";
 @import "./styles/tray.scss";
 @import "./styles/battery.scss";
@@ -18,6 +19,9 @@
 @import "./styles/power-menu.scss";
 @import "./styles/spotify-bar.scss";
 @import "./styles/spotify-panel.scss";
+@import "./styles/volume_indicator.scss";
+@import "./styles/brightness_indicator.scss";
+@import "./styles/keyboard-layout.scss";
 
 // Global Styles
 .bar {
