@@ -48,6 +48,8 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 hl.bind(mainMod .. " + TAB", hl.dsp.layout("cyclenext"))
 hl.bind(mainMod .. " + SHIFT + TAB", hl.dsp.layout("cycleprev"))
 
+hl.bind("Print", hl.dsp.exec_cmd("/usr/bin/flameshot gui"), {locked = true})
+
 -- Laptop multimedia keys for volume and LCD brightness
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("~/.config/eww/scripts/volume.sh up"), { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("~/.config/eww/scripts/volume.sh down"),      { locked = true, repeating = true })
